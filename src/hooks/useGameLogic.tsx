@@ -17,12 +17,15 @@ interface GameLogicReturn {
     setSelected: React.Dispatch<React.SetStateAction<{ i: number; path: number }[]>>;
     setAdjustTransition: React.Dispatch<React.SetStateAction<boolean>>;
     numberOfCells: number;
+    color: string
 }
 
 export const useGameLogic = (): GameLogicReturn => {
     const level = gameStore((state) => state.level);
     const pairNumber = gameStore((state) => state.pairNumber);
     const currentPlayer = gameStore((state) => state.currentPlayer);
+
+    const {isStarted} = statisticStore()
 
     const updatePlayer = statisticStore((state) => state.updatePlayer);
     const setWinner = statisticStore((state) => state.setWinner);
@@ -101,7 +104,7 @@ export const useGameLogic = (): GameLogicReturn => {
         setFlipped([]);
         setSelected([]);
         setAdjustTransition(false);
-    }, [level, pairNumber]);
+    }, [level, pairNumber, isStarted]);
 
     return {
         selected,
@@ -111,5 +114,6 @@ export const useGameLogic = (): GameLogicReturn => {
         setSelected,
         setAdjustTransition,
         numberOfCells,
+        color: statisticStore.getState().players[currentPlayer]?.color ?? ""
     };
 };

@@ -16,7 +16,7 @@ const Board: React.FC = () => {
     matches,
     adjustTransition,
     setSelected,
-    setAdjustTransition, } = useGameLogic()
+    setAdjustTransition, color } = useGameLogic()
 
   const { images, isLoading } = useImages(numberOfCells, pairNumber)
 
@@ -41,6 +41,7 @@ const Board: React.FC = () => {
                 isFlipped={isFlipped}
                 isMatched={matched}
                 isSelected={isSelected}
+                color={color}
                 onClick={() => {
                   if (!adjustTransition) {
                     setAdjustTransition(true);

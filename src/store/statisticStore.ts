@@ -46,5 +46,30 @@ export const statisticStore = create<Statistic>((set) => ({
     },
     setDuration: (time) => {
         set({time})
+    },
+    resetGameStats: (resetWins?: boolean) => {
+        set((state) => {
+            const resetPlayers = Object.fromEntries(
+                Object.entries(state.players).map(([key, player]) => [
+                    key,
+                    {
+                        ...player,
+                        attempts: 0,
+                        correctAttempts: 0,
+                        time: 0,
+                        isPaused: true,
+                        points: 0,
+                        wins: resetWins ? 0 : player.wins,  
+                    }
+                ])
+            );
+
+            return {
+                isStarted: false,
+                players: resetPlayers,
+                winner: "",
+                time: 0,
+            };
+        });
     }
 }));

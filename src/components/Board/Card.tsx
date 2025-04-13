@@ -9,6 +9,7 @@ interface CardProps {
   isStarted: boolean;
   onClick: () => void;
   adjustTransition: boolean;
+  color: string
 }
 
 const Card: React.FC<CardProps> = ({
@@ -20,6 +21,7 @@ const Card: React.FC<CardProps> = ({
   isSelected,
   onClick,
   adjustTransition,
+  color,
 }) => {
   const className = `flip-card ${isFlipped ? "static" : isStarted ? "flipped" : "static"}`;
   const flipCardBackClass = `flip-card-back ${isSelected ? "target" : "static"}`;
@@ -42,7 +44,9 @@ const Card: React.FC<CardProps> = ({
         <div className="flip-card-front">
           {isStarted && img && <img src={img} alt="card-img" />}
         </div>
-        <div className={flipCardBackClass}></div>
+        <div
+          style={{ "--target": color } as React.CSSProperties}
+          className={flipCardBackClass}></div>
       </div>
     </li>
   );

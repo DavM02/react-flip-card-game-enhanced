@@ -6,7 +6,7 @@ import { statisticStore } from "../../store/statisticStore";
 import MainButton from "../ui/Button/MainButton";
 
 export default function Statistic() {
-    const { winner, time, players } = statisticStore();
+    const { winner, time, players, resetGameStats } = statisticStore();
 
     return (
         <Portal>
@@ -43,16 +43,27 @@ export default function Statistic() {
                                 })}
                             </div>
 
-                            <MainButton
-                                type="button"
-                                onClick={() => {
-                            
-                                  console.log('')
-                                }}
-                                colorVariant="violet"
-                            >
-                               play again
-                            </MainButton>
+                            <div className="buttons">
+                                <MainButton
+                                    type="button"
+                                    onClick={() => {
+                                        resetGameStats()
+                                    }}
+                                    colorVariant="yellow"
+                                >
+                                    continiue
+                                </MainButton>
+                                <MainButton
+                                    type="button"
+                                    onClick={() => {
+                                        resetGameStats(true)
+                                    }}
+                                    colorVariant="red"
+                                >
+                                    restart
+                                </MainButton>
+                            </div>
+
                         </SmoothWrapper>
                         <SmoothWrapper className="overlay" />
                     </>

@@ -9,7 +9,7 @@ import Portal from "../ui/Portal/Portal";
 import SmoothWrapper from "../ui/SmoothWrapper/SmoothWrapper";
 const StartGame: React.FC = () => {
 
-  const { isStarted } = statisticStore()
+  const { isStarted, resetGameStats } = statisticStore()
 
   const [show, setShow] = useState<boolean>(false)
 
@@ -31,7 +31,7 @@ const StartGame: React.FC = () => {
           start game
         </MainButton>
         <MainButton
-          onClick={() => console.log("")}
+          onClick={() => resetGameStats(true)}
           disabled={!isStarted}
           colorVariant="red"
           type="button"

@@ -3,43 +3,36 @@ import SmoothWrapper from "../SmoothWrapper/SmoothWrapper";
 import { AnimatePresence } from "framer-motion";
 import './confrim.css'
 import MainButton from "../Button/MainButton";
+import { statisticStore } from "../../../store/statisticStore";
+import { gameStore } from "../../../store/gameStore";
 
 export default function Confirm() {
-    // const context = useContext(GameContext);
+    const { resetGameStats } = statisticStore();
+    const { restartConfig, setRestartConfig, setLevel, setPairNumber, setCurrentPlayer } = gameStore();
 
-    // if (!context) return null;
+    const handleConfirm = () => {
+        setCurrentPlayer("");  
+        setLevel(restartConfig.level);
+        setPairNumber(restartConfig.pairNumber);
+        setRestartConfig({ restart: false });
+        resetGameStats(true);  
+    };
 
-    // const { restart } = context.gameConfig.restartConfig;
-
-    // const handleConfirm = () => {
-    //     context.setGameConfig(prev => ({
-    //         ...prev,
-    //         character: null,
-    //         pairNumber: prev.restartConfig.pairNumber,
-    //         level: prev.restartConfig.level,
-    //         restartConfig: { ...prev.restartConfig, restart: false },
-    //     }));
-    //     context.setStatistic((prev) => ({ ...prev, isStarted: false, time: 0 }))
-    // };
-
-    // const handleCancel = () => {
-    //     context.setGameConfig(prev => ({
-    //         ...prev,
-    //         restartConfig: { ...prev.restartConfig, restart: false }
-    //     }));
-    // };
+    const handleCancel = () => {
+        setRestartConfig({ restart: false }); 
+    };
 
     return (
         <Portal>
             <AnimatePresence mode="wait">
-                {restart && (
+                {restartConfig.restart && (
                     <>
                         <SmoothWrapper className="modal confirm">
                             <h3>
                                 The game is currently in the process. <br />
                                 Changing the configuration will reset the game.
                             </h3>
-                            {/* <div className="buttons">
+                            <div className="buttons">
                                 <MainButton
                                     onClick={handleConfirm}
                                     type="button"
@@ -54,7 +47,7 @@ export default function Confirm() {
                                 >
                                     cancel
                                 </MainButton>
-                            </div> */}
+                            </div>
                         </SmoothWrapper>
                         <SmoothWrapper className="overlay" />
                     </>

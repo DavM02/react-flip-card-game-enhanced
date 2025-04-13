@@ -4,10 +4,6 @@ import { GameConfig } from "../types/types";
 export const gameStore = create<GameConfig>((set) => ({
     level: "easy",
     currentPlayer: "",
-    imagesLimit: {
-        start: 0,
-        end: null,
-    },
     pairNumber: 2,
     restartConfig: {
         restart: false,

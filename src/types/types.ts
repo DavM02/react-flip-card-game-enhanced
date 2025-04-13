@@ -6,10 +6,7 @@ export type PairNumber = 2 | 3 | 4;
 // game
 
 export interface GameConfig {
-    imagesLimit: {
-        start: number,
-        end: number | null;
-    }
+
     currentPlayer: string,
     level: Level;
     pairNumber: PairNumber;
@@ -46,5 +43,5 @@ export interface Statistic {
     setIsStarted: (val: boolean) => void,
     setWinner: (playerKey: string) => void;  
     setDuration: (time: number) => void;
-
+    resetGameStats: (resetWins?: boolean) => void;
 }

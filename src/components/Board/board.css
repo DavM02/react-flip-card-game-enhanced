@@ -62,7 +62,7 @@
 }
 
 .flip-card-back.target {
-    background-color: var(--blue);
+    background-color: var(--target);
 }
 
 .flip-card.flipped .flip-card-inner {

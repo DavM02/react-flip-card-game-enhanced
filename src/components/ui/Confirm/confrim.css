@@ -1,0 +1,11 @@
+.confirm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.confirm .buttons {
+    display: flex;
+    gap: 20px;
+}

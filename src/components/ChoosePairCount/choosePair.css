@@ -1,0 +1,5 @@
+.choose-pair-count {
+   display: flex;
+   gap: 10px;
+   margin: 10px 0 20px;
+}

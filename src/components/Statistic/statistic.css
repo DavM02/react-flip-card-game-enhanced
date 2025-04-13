@@ -1,0 +1,36 @@
+.statistic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--black);
+}
+
+
+.statistic  h2 + p {
+    margin: 15px 0;
+}
+
+.statistic button {
+    margin-top: 15px;
+}
+
+.statistic .image {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.players-statistic {
+    display: flex;
+    gap: 50px;
+}
+
+.player-card {
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.player-card p {
+    margin-top: 5px;
+}

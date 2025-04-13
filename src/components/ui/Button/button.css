@@ -1,0 +1,43 @@
+.main-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  text-transform: capitalize;
+  border-radius: 5px;
+  outline-offset: -3.5px;
+  font-size: 15px;
+  outline: 1px solid transparent;
+  transition: var(--transition) 0.7s opacity, var(--transition) 0.7s outline;
+}
+
+.main-button.active {
+  outline: 1px solid var(--white);
+}
+
+.main-button.red {
+  background-color: var(--red);
+}
+
+.main-button.blue {
+  background-color: var(--blue);
+}
+
+.main-button.violet {
+  background-color: var(--violet);
+}
+
+.main-button.yellow {
+  background-color: var(--yellow);
+}
+
+.main-button.green {
+  background-color: var(--green);
+}
+
+.main-button:hover {
+  opacity: 0.6;
+}
+
+.main-button:disabled {
+  opacity: 60%;
+  cursor: not-allowed;
+}

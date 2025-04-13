@@ -1,0 +1,8 @@
+.actions button {
+  margin-top: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}

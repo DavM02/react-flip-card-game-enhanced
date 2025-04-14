@@ -14,7 +14,7 @@ interface PlayerProps {
 
 const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
     const { currentPlayer } = gameStore();
-    const { isStarted, updatePlayer } = statisticStore();
+    const { isStarted, winner, updatePlayer } = statisticStore();
 
     
     const [localTime, setLocalTime] = useState(0);
@@ -24,7 +24,8 @@ const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
 
  
     useEffect(() => {
-        if (!isStarted) {
+
+        if (winner || !isStarted) {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
                 intervalRef.current = null;
@@ -41,19 +42,7 @@ const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
             intervalRef.current = setInterval(() => {
                 setLocalTime((prev) => prev + 1);
             }, 1000);
-        } else {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
-
-                if (localTime > 0) {
-                    updatePlayer(playerKey, {
-                        time: player.time + localTime,
-                    });
-                    setLocalTime(0);
-                }
-            }
-        }
+        }  
 
         return () => {
             if (intervalRef.current) {
@@ -61,7 +50,8 @@ const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
                 intervalRef.current = null;
             }
         };
-    }, [isActive, isStarted]);
+    }, [isActive, isStarted, winner]);
+
 
 
     return (

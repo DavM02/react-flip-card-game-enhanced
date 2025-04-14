@@ -29,6 +29,8 @@ export const useGameLogic = (): GameLogicReturn => {
 
     const updatePlayer = statisticStore((state) => state.updatePlayer);
     const setWinner = statisticStore((state) => state.setWinner);
+    const setCurrentPlayer = gameStore((state) => state.setCurrentPlayer);
+
     const numberOfCells = grid[level];
 
     const [selected, setSelected] = useState<{ i: number; path: number }[]>([]);
@@ -92,8 +94,10 @@ export const useGameLogic = (): GameLogicReturn => {
                 const prevWins = players[winnerKey].wins;
                 updatePlayer(winnerKey, { wins: prevWins + 1 });
                 setWinner(winnerKey);
+                setCurrentPlayer("")
             } else {
                 setWinner("draw"); 
+                setCurrentPlayer("")
             }
         }
     }, [matches, numberOfCells]);

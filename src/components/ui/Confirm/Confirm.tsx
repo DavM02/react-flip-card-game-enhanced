@@ -8,13 +8,10 @@ import { gameStore } from "../../../store/gameStore";
 
 export default function Confirm() {
     const { resetGameStats } = statisticStore();
-    const { restartConfig, setRestartConfig, setLevel, setPairNumber, setCurrentPlayer } = gameStore();
+    const { restartConfig, setRestartConfig, resetGameConfig } = gameStore();
 
     const handleConfirm = () => {
-        setCurrentPlayer("");  
-        setLevel(restartConfig.level);
-        setPairNumber(restartConfig.pairNumber);
-        setRestartConfig({ showRestartConfirmation: false });
+        resetGameConfig()
         resetGameStats(true);  
     };
 

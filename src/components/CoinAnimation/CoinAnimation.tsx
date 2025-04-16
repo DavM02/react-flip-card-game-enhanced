@@ -1,40 +1,20 @@
-import { useEffect, useState } from "react"
 import { statisticStore } from "../../store/statisticStore"
-import { gameStore } from "../../store/gameStore"
 import './coinAnimation.css'
 
-export default function CoinAnimation() {
+interface CoinAnimationProps {
+    closeModal: () => void,
+    transform: number,
+}
+
+const CoinAnimation: React.FC<CoinAnimationProps> = ({ closeModal, transform }) => {
+    
     const { players, setIsStarted } = statisticStore()
-    const { setCurrentPlayer } = gameStore()
-    const [transform, setTransform] = useState<number>(0)
-
-    function generateNumber() {
-        return Math.max(5, Math.floor(Math.random() * 20))
-    }
- 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            const number = generateNumber()
-            const angle = number * 180
-
-            setTransform(angle)
-
-            if (number % 2 === 0) {
-                setCurrentPlayer("player-1")
-            } else {
-                setCurrentPlayer("player-2")
-             
-            }
-           
-        }, 1000)
-
-        return () => clearTimeout(timeout)
-    }, [])
 
     return (
         <div className="coin-inner"
             onTransitionEnd={() => {
                 setIsStarted(true)
+                closeModal()
             }}
             style={{ transform: `rotateY(${transform}deg)` }}>
             <div className="coin-front" style={{ backgroundColor: players["player-1"].color }}>
@@ -46,3 +26,5 @@ export default function CoinAnimation() {
         </div>
     )
 }
+
+export default CoinAnimation

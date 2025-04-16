@@ -13,4 +13,5 @@ export interface GameConfig {
     setPairNumber: (pair: PairNumber) => void;
     setRestartConfig: (config: Partial<GameConfig["restartConfig"]>) => void;
     setCurrentPlayer: (name: string) => void;
+    resetGameConfig: () => void
 };

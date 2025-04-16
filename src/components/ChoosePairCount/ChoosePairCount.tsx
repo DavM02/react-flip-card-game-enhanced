@@ -9,7 +9,7 @@ export default function ChoosePairCount() {
 
     const { pairNumber, setPairNumber, setRestartConfig } = gameStore()
     const { isStarted } = statisticStore()
-    console.log(pairNumber)
+ 
       
     function handlePairChange(pairNumber: PairNumber): void {
         if (!isStarted) {

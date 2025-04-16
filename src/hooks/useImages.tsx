@@ -21,6 +21,7 @@ interface UseImagesReturn {
 };
 
 export const useImages = (numberOfCells: number, pairNumber: PairNumber): UseImagesReturn => {
+    
     const totalPairs = Math.floor(numberOfCells / pairNumber);
 
     const {

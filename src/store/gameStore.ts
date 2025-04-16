@@ -26,5 +26,18 @@ export const gameStore = create<GameConfig>((set) => ({
     },
     setCurrentPlayer: (name)  => {
         set({currentPlayer: name})
+    },
+    resetGameConfig: () => {
+        set((state) => (
+            {
+                currentPlayer: "",
+                level: state.restartConfig.level,
+                pairNumber: state.restartConfig.pairNumber,
+                restartConfig: {
+                    ...state.restartConfig,
+                    showRestartConfirmation: false,
+                },
+            }
+        ));
     }
 }));

@@ -1,11 +1,10 @@
-import React from "react";
-
 import "./board.css";
 import { statisticStore } from "../../store/statisticStore";
 import { gameStore } from "../../store/gameStore";
 import { useGameLogic } from "../../hooks/useGameLogic";
 import Card from "./Card";
 import { useImages } from "../../hooks/useImages";
+
 const Board: React.FC = () => {
 
   const { level, pairNumber } = gameStore()

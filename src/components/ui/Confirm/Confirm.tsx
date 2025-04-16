@@ -14,18 +14,18 @@ export default function Confirm() {
         setCurrentPlayer("");  
         setLevel(restartConfig.level);
         setPairNumber(restartConfig.pairNumber);
-        setRestartConfig({ restart: false });
+        setRestartConfig({ showRestartConfirmation: false });
         resetGameStats(true);  
     };
 
     const handleCancel = () => {
-        setRestartConfig({ restart: false }); 
+        setRestartConfig({ showRestartConfirmation: false }); 
     };
 
     return (
         <Portal>
             <AnimatePresence mode="wait">
-                {restartConfig.restart && (
+                {restartConfig.showRestartConfirmation && (
                     <>
                         <SmoothWrapper className="modal confirm">
                             <h3>

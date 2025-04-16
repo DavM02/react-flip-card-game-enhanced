@@ -9,7 +9,7 @@ export default function CoinAnimation() {
     const [transform, setTransform] = useState<number>(0)
 
     function generateNumber() {
-        return Math.max(5, Math.floor(Math.random() * 11))
+        return Math.max(5, Math.floor(Math.random() * 20))
     }
  
     useEffect(() => {
@@ -21,7 +21,6 @@ export default function CoinAnimation() {
 
             if (number % 2 === 0) {
                 setCurrentPlayer("player-1")
-                 
             } else {
                 setCurrentPlayer("player-2")
              

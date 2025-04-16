@@ -15,7 +15,7 @@ const ChooseLevel: React.FC = () => {
       setLevel(level);
     } else {
       setRestartConfig({
-        restart: true,
+        showRestartConfirmation: true,
         level,
       });
     }

@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { GameConfig } from "../types/types";
+import { GameConfig } from "../types/GameConfig";
 
 export const gameStore = create<GameConfig>((set) => ({
     level: "easy",
     currentPlayer: "",
     pairNumber: 2,
     restartConfig: {
-        restart: false,
+        showRestartConfirmation: false,
         level: "easy",
         pairNumber: 2,
     },

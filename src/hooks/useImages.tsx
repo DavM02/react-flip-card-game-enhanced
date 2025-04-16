@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { PairNumber } from '../types/types';
 
-type Image = {
-    id: string;
+interface Image  {
+    id: number;
     author: string;
     width: number;
     height: number;
@@ -12,7 +12,15 @@ type Image = {
     resized_url: string;  
 };
 
-export const useImages = (numberOfCells: number, pairNumber: PairNumber) => {
+interface UseImagesReturn {
+    images: (Image)[] | undefined;
+    isLoading: boolean;
+    isError: boolean;
+    isSuccess: boolean;
+    error: Error | null;
+};
+
+export const useImages = (numberOfCells: number, pairNumber: PairNumber): UseImagesReturn => {
     const totalPairs = Math.floor(numberOfCells / pairNumber);
 
     const {
@@ -21,7 +29,6 @@ export const useImages = (numberOfCells: number, pairNumber: PairNumber) => {
         isError,
         error,
         isSuccess,
-        refetch,
     } = useQuery<Image[], Error>({
         queryKey: [`images-${numberOfCells}-${pairNumber}`],
         queryFn: async () => {
@@ -65,6 +72,5 @@ export const useImages = (numberOfCells: number, pairNumber: PairNumber) => {
         isError,
         isSuccess,
         error,
-        refetch,
     };
 };

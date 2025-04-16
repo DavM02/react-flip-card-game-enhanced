@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import "./layout.css";
 import Player from "../PlayersConfig/Player";
 import { statisticStore } from "../../store/statisticStore";

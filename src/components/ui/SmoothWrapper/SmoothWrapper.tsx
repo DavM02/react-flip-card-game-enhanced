@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 
 interface SmoothWrapperProps extends HTMLMotionProps<"div"> {
     children?: ReactNode;
-    key?: number | string
 }
 
 export default function SmoothWrapper({ children, ...props }: SmoothWrapperProps) {

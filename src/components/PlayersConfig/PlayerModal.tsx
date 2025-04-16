@@ -1,5 +1,4 @@
-// PlayerModal.tsx
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Portal from '../ui/Portal/Portal'
 import { AnimatePresence } from 'framer-motion'
 import SmoothWrapper from '../ui/SmoothWrapper/SmoothWrapper'

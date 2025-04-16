@@ -21,16 +21,15 @@ interface GameLogicReturn {
 }
 
 export const useGameLogic = (): GameLogicReturn => {
-    const level = gameStore((state) => state.level);
-    const pairNumber = gameStore((state) => state.pairNumber);
-    const currentPlayer = gameStore((state) => state.currentPlayer);
+   
 
-    const {isStarted} = statisticStore()
+    const { level, pairNumber, currentPlayer, setCurrentPlayer } = gameStore()
 
-    const updatePlayer = statisticStore((state) => state.updatePlayer);
-    const setWinner = statisticStore((state) => state.setWinner);
-    const setCurrentPlayer = gameStore((state) => state.setCurrentPlayer);
+    const { isStarted, setWinner, updatePlayer } = statisticStore()
 
+ 
+ 
+  
     const numberOfCells = grid[level];
 
     const [selected, setSelected] = useState<{ i: number; path: number }[]>([]);
@@ -67,7 +66,7 @@ export const useGameLogic = (): GameLogicReturn => {
 
               
                     const nextPlayer = currentPlayer === "player-1" ? "player-2" : "player-1";
-                    gameStore.getState().setCurrentPlayer(nextPlayer);
+                    setCurrentPlayer(nextPlayer);
                 }
 
                 setSelected([]);

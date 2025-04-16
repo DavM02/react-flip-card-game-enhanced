@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Statistic } from "../types/types";
+import { Statistic } from "../types/Statistic";
 
 export const statisticStore = create<Statistic>((set) => ({
     winner: "",
@@ -12,7 +12,6 @@ export const statisticStore = create<Statistic>((set) => ({
             attempts: 0,
             correctAttempts: 0,
             time: 0,
-            isPaused: true,
             points: 0,
             wins: 0,
         },
@@ -22,7 +21,6 @@ export const statisticStore = create<Statistic>((set) => ({
             attempts: 0,
             correctAttempts: 0,
             time: 0,
-            isPaused: true,
             points: 0,
             wins: 0,
         }
@@ -57,7 +55,6 @@ export const statisticStore = create<Statistic>((set) => ({
                         attempts: 0,
                         correctAttempts: 0,
                         time: 0,
-                        isPaused: true,
                         points: 0,
                         wins: resetWins ? 0 : player.wins,  
                     }

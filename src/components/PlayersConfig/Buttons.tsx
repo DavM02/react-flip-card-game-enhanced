@@ -1,4 +1,3 @@
-import React from 'react'
 import MainButton from '../ui/Button/MainButton'
 
 interface ButtonsProps {

@@ -17,7 +17,7 @@ export default function ChoosePairCount() {
 
         } else {
             setRestartConfig({
-                restart: true,
+                showRestartConfirmation: true,
                 pairNumber
             })
         }

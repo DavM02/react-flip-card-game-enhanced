@@ -1,5 +1,4 @@
 
-import React from 'react'
 import PlayerForm from './PlayerForm'
 import { TempPlayers, PlayerKey } from './PlayerModal'
 import MainButton from '../ui/Button/MainButton'

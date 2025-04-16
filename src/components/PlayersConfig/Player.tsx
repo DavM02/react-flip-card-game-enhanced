@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './playersConfig.css';
 import { gameStore } from '../../store/gameStore';
-import { Statistic } from '../../types/types';
+import { Statistic } from '../../types/Statistic';
 import PlayerModal from './PlayerModal';
 import { statisticStore } from '../../store/statisticStore';
 

@@ -2,20 +2,40 @@
 import PlayerForm from './PlayerForm'
 import { TempPlayers, PlayerKey } from './PlayerModal'
 import MainButton from '../ui/Button/MainButton'
+import { useState } from 'react'
+import { statisticStore } from '../../store/statisticStore'
+
+interface PlayerData {
+    name: string
+    color: string
+}
 
 interface ModalContentProps {
-    tempPlayers: TempPlayers
-    setTempPlayers: React.Dispatch<React.SetStateAction<TempPlayers>>
-    handleUpdate: () => void
+ 
     closeModal: () => void
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({
-    tempPlayers,
-    setTempPlayers,
-    handleUpdate,
+ 
     closeModal,
 }) => {
+
+
+    const { players, updatePlayer } = statisticStore()
+    const [tempPlayers, setTempPlayers] = useState<TempPlayers>({
+        'player-1': { name: players['player-1'].name, color: players['player-1'].color },
+        'player-2': { name: players['player-2'].name, color: players['player-2'].color }
+    })
+
+
+   
+    const handleUpdate = () => {
+        (Object.entries(tempPlayers) as [PlayerKey, PlayerData][]).forEach(([key, data]) => {
+            updatePlayer(key, data)
+        })
+        closeModal()
+    }
+
     return (
         
         <>

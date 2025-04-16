@@ -13,12 +13,14 @@ interface PlayerProps {
 }
 
 const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
+    
     const { currentPlayer } = gameStore();
+
     const { isStarted, winner, updatePlayer } = statisticStore();
 
+    const [localTime, setLocalTime] = useState<number>(0);
     
-    const [localTime, setLocalTime] = useState(0);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const intervalRef = useRef<ReturnType<typeof setInterval>>(null);
 
     const isActive = currentPlayer === playerKey && isStarted;
 

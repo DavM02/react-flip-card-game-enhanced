@@ -9,7 +9,6 @@
     transition: var(--transition) 0.5s opacity;
     justify-content: center;
     text-align: center;
-    min-width: 200px;
 }
 
 .players-config input[type="text"] {
@@ -40,7 +39,7 @@
 
 .players-config>div:nth-child(1) {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     gap: 5px;
 }
@@ -49,7 +48,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5px;
 }
 
 .players-config label {

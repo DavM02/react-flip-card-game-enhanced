@@ -4,23 +4,11 @@ import { AnimatePresence } from 'framer-motion'
 import SmoothWrapper from '../ui/SmoothWrapper/SmoothWrapper'
 import ModalContent from './ModalContent'
 import MainButton from '../ui/Button/MainButton'
- 
+import { PlayerKey } from '../../types/types'
 
-export type PlayerKey = 'player-1' | 'player-2'  
+const PlayerModal: React.FC<{ playerKey: PlayerKey }> = ({ playerKey }) => {
 
-interface PlayerData {
-    name: string
-    color: string
-}
-
-export type TempPlayers = Record<PlayerKey, PlayerData>  
-
-const PlayerModal: React.FC = () => {
     const [show, setShow] = useState<boolean>(false)
-
-    const closeModal = () => {
-        setShow(false)
-    }
 
     return (
         <>
@@ -34,11 +22,12 @@ const PlayerModal: React.FC = () => {
                         <>
                             <SmoothWrapper className='modal players-config'>
                                 <ModalContent
-                                    closeModal={closeModal}
+                                    playerKey={playerKey}
+                                    closeModal={() => setShow(false)}
                                 />
                             </SmoothWrapper>
 
-                            <SmoothWrapper className='overlay' onClick={closeModal} />
+                            <SmoothWrapper className='overlay' onClick={() => setShow(false)} />
                         </>
                     )}
                 </AnimatePresence>

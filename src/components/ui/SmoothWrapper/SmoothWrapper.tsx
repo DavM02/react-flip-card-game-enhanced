@@ -1,9 +1,7 @@
 import { motion, HTMLMotionProps } from "framer-motion";
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
-interface SmoothWrapperProps extends HTMLMotionProps<"div"> {
-    children?: ReactNode;
-}
+type SmoothWrapperProps = PropsWithChildren<HTMLMotionProps<"div">>;
 
 export default function SmoothWrapper({ children, ...props }: SmoothWrapperProps) {
     return (

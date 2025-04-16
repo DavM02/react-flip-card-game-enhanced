@@ -1,9 +1,9 @@
 
 import PlayerForm from './PlayerForm'
-import { TempPlayers, PlayerKey } from './PlayerModal'
 import MainButton from '../ui/Button/MainButton'
 import { useState } from 'react'
 import { statisticStore } from '../../store/statisticStore'
+import { PlayerKey } from '../../types/types'
 
 interface PlayerData {
     name: string
@@ -11,56 +11,53 @@ interface PlayerData {
 }
 
 interface ModalContentProps {
- 
-    closeModal: () => void
+    closeModal: () => void,
+    playerKey: PlayerKey
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({
- 
+    playerKey,
     closeModal,
 }) => {
 
-
     const { players, updatePlayer } = statisticStore()
-    const [tempPlayers, setTempPlayers] = useState<TempPlayers>({
-        'player-1': { name: players['player-1'].name, color: players['player-1'].color },
-        'player-2': { name: players['player-2'].name, color: players['player-2'].color }
-    })
+
+    // local state եմ ստեղծում, որ փոփոխությունները ստեղ կիրառվեն 
+    // ու button-ը click անելուց հետո նոր store-ում եմ պահում, որ ամեն անգամ store-ում trigger չանեմ, նույն ձևով էլ timerner-ը
+
+    const [tempPlayer, setTempPlayer] = useState<PlayerData>({ name: players[playerKey].name, color: players[playerKey].color })
 
 
-   
     const handleUpdate = () => {
-        (Object.entries(tempPlayers) as [PlayerKey, PlayerData][]).forEach(([key, data]) => {
-            updatePlayer(key, data)
-        })
+        updatePlayer(playerKey, tempPlayer)
         closeModal()
     }
 
     return (
-        
+
         <>
-            <div>
-                {(['player-1', 'player-2'] as PlayerKey[]).map((key) => (
-                    <PlayerForm
-                        key={key}
-                        playerKey={key}
-                        name={tempPlayers[key].name}
-                        color={tempPlayers[key].color}
-                        onNameChange={(value) =>
-                            setTempPlayers((prev) => ({
-                                ...prev,
-                                [key]: { ...prev[key], name: value }
-                            }))
+            <PlayerForm
+                playerKey={playerKey}
+                name={tempPlayer.name}
+                color={tempPlayer.color}
+                onNameChange={(value) => {
+                    setTempPlayer((prev) => (
+                        {
+                            ...prev,
+                            name: value
                         }
-                        onColorChange={(value) =>
-                            setTempPlayers((prev) => ({
-                                ...prev,
-                                [key]: { ...prev[key], color: value }
-                            }))
+                    ))
+                }}
+                onColorChange={(value) => {
+                    setTempPlayer((prev) => (
+                        {
+                            ...prev,
+                            color: value
                         }
-                    />
-                ))}
-            </div>
+                    ))
+                }}
+
+            />
 
             <div className='buttons'>
                 <MainButton type='button' onClick={handleUpdate} colorVariant='yellow'>

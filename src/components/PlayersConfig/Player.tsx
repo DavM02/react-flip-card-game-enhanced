@@ -1,60 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
 import './playersConfig.css';
 import { gameStore } from '../../store/gameStore';
 import { Statistic } from '../../types/Statistic';
 import PlayerModal from './PlayerModal';
 import { statisticStore } from '../../store/statisticStore';
+import { usePlayerTimer } from '../../hooks/usePlayerTImer';
+import { PlayerKey } from '../../types/types';
 
 type PlayerType = Statistic['players'][string];
 
 interface PlayerProps {
-    playerKey: "player-1" | "player-2";
+    playerKey: PlayerKey
     player: PlayerType;
 }
 
 const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
-    
-    const { currentPlayer } = gameStore();
 
-    const { isStarted, winner, updatePlayer } = statisticStore();
-
-    const [localTime, setLocalTime] = useState<number>(0);
-    
-    const intervalRef = useRef<ReturnType<typeof setInterval>>(null);
-
-    const isActive = currentPlayer === playerKey && isStarted;
-
+    const localtime = usePlayerTimer(playerKey, player.time)
  
-    useEffect(() => {
+    const { isStarted } = statisticStore();
 
-        if (winner || !isStarted) {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
-            }
-            if (localTime > 0) {
-                updatePlayer(playerKey, {
-                    time: player.time + localTime,
-                });
-                setLocalTime(0);
-            }
-        }
-
-        if (isActive) {
-            intervalRef.current = setInterval(() => {
-                setLocalTime((prev) => prev + 1);
-            }, 1000);
-        }  
-
-        return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
-            }
-        };
-    }, [isActive, isStarted, winner]);
-
-
+    const {currentPlayer} = gameStore()
 
     return (
         <div
@@ -74,13 +39,13 @@ const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
             </div>
             <div>
                 <h4>Time:</h4>
-                <h3>{localTime}</h3>
+                <h3>{localtime}</h3>
             </div>
             <div>
                 <h4>Wins:</h4>
                 <h3>{player.wins}</h3>
             </div>
-            <PlayerModal />
+            <PlayerModal playerKey={playerKey} />
         </div>
     );
 };

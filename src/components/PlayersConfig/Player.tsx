@@ -1,7 +1,6 @@
 import './playersConfig.css';
 import { gameStore } from '../../store/gameStore';
 import { Statistic } from '../../types/Statistic';
-import PlayerModal from './PlayerModal';
 import { statisticStore } from '../../store/statisticStore';
 import { usePlayerTimer } from '../../hooks/usePlayerTImer';
 import { PlayerKey } from '../../types/types';
@@ -45,7 +44,7 @@ const Player: React.FC<PlayerProps> = ({ player, playerKey }) => {
                 <h4>Wins:</h4>
                 <h3>{player.wins}</h3>
             </div>
-            <PlayerModal playerKey={playerKey} />
+
         </div>
     );
 };

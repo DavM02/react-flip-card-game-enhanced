@@ -9,6 +9,12 @@
     transition: var(--transition) 0.5s opacity;
     justify-content: center;
     text-align: center;
+    min-width: 200px;
+
+}
+
+.players-config {
+    text-align: center;
 }
 
 .players-config input[type="text"] {
@@ -39,6 +45,11 @@
 
 .players-config>div:nth-child(1) {
     display: flex;
+    justify-content: space-around;
+}
+
+.players-config>div:nth-child(1) > div {
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
@@ -54,9 +65,8 @@
     cursor: pointer;
 }
 
-.players-config .buttons {
-    display: flex;
-    gap: 10px;
+.players-config button {
+ 
     margin-top: 20px;
-    justify-content: center;
+ 
 }

@@ -34,7 +34,7 @@ export const useGameLogic = (): GameLogicReturn => {
     const onCardClick = (card: { i: number; path: number }) => {
         if (!isStarted) return;
         if (flipped.includes(card.i) || matches.includes(card.i)) return;
- 
+
         if (selected.length === pairNumber) {
             setSelected([card]);
             setFlipped([card.i]);
@@ -64,7 +64,7 @@ export const useGameLogic = (): GameLogicReturn => {
             const nextPlayer = currentPlayer === "player-1" ? "player-2" : "player-1";
             setTimeout(() => {
                 setFlipped((prev) => prev.filter((i) => !indexes.includes(i)));
-            }, 600); 
+            }, 600);
             setCurrentPlayer(nextPlayer);
         }
 
@@ -72,8 +72,8 @@ export const useGameLogic = (): GameLogicReturn => {
     }, [selected]);
 
     const totalMatchedCells = useMemo(() => {
-    return  Math.floor(numberOfCells / pairNumber) * pairNumber;
-     }, [level, pairNumber]);
+        return Math.floor(numberOfCells / pairNumber) * pairNumber;
+    }, [level, pairNumber]);
 
     useEffect(() => {
         if (isStarted && matches.length === totalMatchedCells) {

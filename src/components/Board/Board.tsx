@@ -14,7 +14,7 @@ const Board: React.FC = () => {
     flipped,
     matches,
     adjustTransition,
-    setSelected,
+    onCardClick,
     setAdjustTransition, color } = useGameLogic()
 
   const { images, isLoading } = useImages(numberOfCells, pairNumber)
@@ -42,19 +42,10 @@ const Board: React.FC = () => {
                 isSelected={isSelected}
                 color={color}
                 onClick={() => {
-                  if (!adjustTransition) {
-                    setAdjustTransition(true);
-                  }
-
-                  if (
-                    selected.find((sel) => sel.i === i) ||
-                    matches.includes(i) ||
-                    selected.length === pairNumber
-                  )
-                    return;
-
-                  setSelected((prev) => [...prev, { i, path: id }]);
+                  if (!adjustTransition) setAdjustTransition(true);
+                  onCardClick({ i, path: id });  
                 }}
+
                 adjustTransition={adjustTransition}
               />
             );

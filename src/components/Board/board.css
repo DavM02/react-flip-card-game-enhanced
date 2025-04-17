@@ -2,7 +2,7 @@
   width: 100%;
   margin-bottom: 50px;
 }
- 
+
 
 .board ul {
   display: grid;
@@ -42,7 +42,7 @@
 
 .flip-card:hover .flip-card-back {
   cursor: pointer;
-  outline: 1px solid var(--white);
+  background-color: var(--target);
 }
 
 .flip-card-inner {
@@ -59,10 +59,6 @@
 
 .flip-card-inner.adjust-transition {
   transition-delay: 0s !important;
-}
-
-.flip-card-back.target {
-    background-color: var(--target);
 }
 
 .flip-card.flipped .flip-card-inner {

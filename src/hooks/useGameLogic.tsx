@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Level } from "../types/types";
 import { gameStore } from "../store/gameStore";
 import { statisticStore } from "../store/statisticStore";

@@ -3,7 +3,7 @@ import MainButton from "../ui/Button/MainButton";
 import { statisticStore } from "../../store/statisticStore";
 import CoinAnimation from "../CoinAnimation/CoinAnimation";
 import { AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Portal from "../ui/Portal/Portal";
 import SmoothWrapper from "../ui/SmoothWrapper/SmoothWrapper";
 import { gameStore } from "../../store/gameStore";
@@ -15,38 +15,31 @@ const StartGame: React.FC = () => {
   const [show, setShow] = useState<boolean>(false)
 
   const { setCurrentPlayer } = gameStore()
-  
-  const [transform, setTransform] = useState<number>(0)
 
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [transform, setTransform] = useState<number>(0)
 
 
   function spinTheCoin() {
 
-    setShow(true)
+    const number = Math.max(10, Math.floor(Math.random() * 20))
+    const angle = number * 180
 
-    timeoutRef.current = setTimeout(() => {
-      const number = Math.max(5, Math.floor(Math.random() * 20))
-      const angle = number * 180
+    setTransform(angle)
 
-      setTransform(angle)
+    if (number % 2 === 0) {
+      setCurrentPlayer("player-1")
+    } else {
+      setCurrentPlayer("player-2")
+    }
 
-      if (number % 2 === 0) {
-        setCurrentPlayer("player-1")
-      } else {
-        setCurrentPlayer("player-2")
-      }
-
-    }, 1000)
   }
-
 
   return (
     <>
       <div className="actions">
         <MainButton
           disabled={isStarted}
-          onClick={spinTheCoin}
+          onClick={() => setShow(true)}
           colorVariant="blue"
           type="button"
         >
@@ -62,16 +55,24 @@ const StartGame: React.FC = () => {
         </MainButton>
       </div>
       <Portal>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait"
+      
+        >
           {show && <>
-            <SmoothWrapper className="coin">
+            <SmoothWrapper
+              onAnimationComplete={(animation) => {
+                if (typeof animation === 'object' && animation !== null && 'opacity' in animation) {
+                  if (animation.opacity === 1) {
+                    spinTheCoin();
+                  }
+                }
+              }}
+              className="coin">
               <CoinAnimation
                 transform={transform}
                 closeModal={() => {
                   setShow(false)
-                  if (timeoutRef.current) {
-                    clearTimeout(timeoutRef.current)
-                  }
+                  setTransform(0)
                 }} />
             </SmoothWrapper>
             <SmoothWrapper className="overlay" />

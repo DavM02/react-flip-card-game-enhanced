@@ -71,8 +71,12 @@ export const useGameLogic = (): GameLogicReturn => {
         setSelected([]);
     }, [selected]);
 
+    const totalMatchedCells = useMemo(() => {
+    return  Math.floor(numberOfCells / pairNumber) * pairNumber;
+     }, [level, pairNumber]);
+
     useEffect(() => {
-        if (isStarted && matches.length === numberOfCells) {
+        if (isStarted && matches.length === totalMatchedCells) {
             const players = statisticStore.getState().players;
             const p1Points = players["player-1"].points;
             const p2Points = players["player-2"].points;
